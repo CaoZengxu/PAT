@@ -14,33 +14,121 @@ typedef struct{
 
 typedef struct{
 	int vnum,arcnum;
-	Vnode V[max];
+	Vnode v[max];
 }MGraph;
 
-void connect(){
+class QueryResult
+{
+	public:
+		int roadNum,stationNum;
+		int stations[stationNum];
+		QueryResult(int rnum,int stationNum);
+		~QueryResult();
 	
-	
+};
+
+QueryResult::QueryResult(int rnum){
+	this.roadNum = rnum;
+}
+
+int connect(MGraph &G,int vex1,int vex2,int line){
+
+	G.arcnum++;
+	if(G.v[vex1].firstAdj==NULL){
+		G.vnum++;
+		Arcnode *newnode = new Arcnode;
+		newnode->adj = NULL;
+		newnode->vex = vex2;
+		newnode->line = line;
+		G.v[vex1].firstAdj = newnode;
+	}else{
+		Arcnode *i=G.v[vex1].firstAdj;
+		while(i->adj!=NULL){
+			i = i->adj;
+		}
+		Arcnode *newnode = new Arcnode;
+		newnode->adj = NULL;
+		newnode->vex = vex2;
+		newnode->line = line;
+		i->adj = newnode;
+	}
+
+	if(G.v[vex2].firstAdj==NULL){
+		G.vnum++;
+		Arcnode *newnode = new Arcnode;
+		newnode->adj = NULL;
+		newnode->vex = vex1;
+		newnode->line = line;
+		G.v[vex1].firstAdj = newnode;
+	}else{
+		Arcnode *i=G.v[vex2].firstAdj;
+		while(i->adj!=NULL){
+			i = i->adj;
+		}
+		Arcnode *newnode = new Arcnode;
+		newnode->adj = NULL;
+		newnode->vex = vex1;
+		newnode->line = line;
+		i->adj = newnode;
+	}
+
+return 0;
 } 
 
+void InitGraph(MGraph &G){
+	for(int i=0;i<max;i++){
+		G.v[i].firstAdj = NULL;
+	}
+	G.vnum = 0;
+	G.arcnum = 0;
+}
+
+
+
 int main(){
-	cout<<456;
+
+	//------------输入部分------------------///
 	int N,M,K;
 	int S;
 	MGraph G;
+	InitGraph(G);
+	cin>>N;
 	G.vnum = N;
 	int t = -1; 
-	int linenum;
+	int linenum = 1;
+
+
 	for(int i=0;i<N;i++){
 		cin>>M;
 		for(int j=0;j<M;j++){
 			cin>>S;
 			if(t!=-1){
-				Arcnode *newnode = new Arcnode;
-				
+				connect(G,t,S,linenum++);
 			}
 			t = S;			
 		} 
 
 	}
+
+	//------------输出部分------------------///
+
+
+	int queryNum;
+	cin>>queryNum;
+	int start[queryNum],end[queryNum];
+
+	for(int i=0;i<queryNum;i++){
+		cin>>start[i];
+		cin>>end[i];
+	}
+
+	for(int i=0;i<queryNum;i++){
+		QueryResult re =  query(start[i],end[i]);
+		cout<<re.roadNum<<endl;
+		
+
+	}
+
+
 	return 0;
 }
