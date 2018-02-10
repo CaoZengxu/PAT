@@ -109,7 +109,11 @@ int main(){
 		} 
 
 	}
+ 
+ QueryResult query(MGraph &G,int start,int end){
+ 	G->  
 
+ }
 	//------------输出部分------------------///
 
 
@@ -123,7 +127,7 @@ int main(){
 	}
 
 	for(int i=0;i<queryNum;i++){
-		QueryResult re =  query(start[i],end[i]);
+		QueryResult re =  query(G,start[i],end[i]);
 		int lineNum = -1;
 		bool LineFlag = false;
 		int firststa,secondsta;
@@ -135,10 +139,9 @@ int main(){
 			rear = re.stations[j];
 			temp = re.stations[j-1];
 			Arcnode *k = G.v[temp].adj;
-			
+
 			while(k!=NULL&&k->vex!=rear)//找到相邻两节点之间的边
 				k = k->adj;
-
 			if(k==NULL)
 				cout<<"寻找邻接节点异常"<<endl;
 
@@ -147,8 +150,10 @@ int main(){
 					LineFlag = true;
 
 				}else{
-					cout<<"take Line#"<<k->line<<" "<<head<<" "<<rear<<endl;
+					cout<<"take Line#"<<lineNUm<<" "<<head<<" "<<temp<<endl;
+					head = temp;
 				}
+				lineNUm = k->line;
 			}
 		}
 	}
