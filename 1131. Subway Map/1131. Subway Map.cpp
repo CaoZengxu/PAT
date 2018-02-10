@@ -129,21 +129,26 @@ int main(){
 		int firststa,secondsta;
 		int lk = 1;
 		int head = re.stations[0];
-		int rear = re.stations[lk];
+		int rear;
 		int temp;
-		for(int j=0;j<re.roadNum;j++){
-
-			Arcnode *k = G.v[head].adj;
-			while(k!=NULL&&k->vex!=rear)//找到两节点之间的边
+		for(int j=1;j<re.stationNum;j++){
+			rear = re.stations[j];
+			temp = re.stations[j-1];
+			Arcnode *k = G.v[temp].adj;
+			
+			while(k!=NULL&&k->vex!=rear)//找到相邻两节点之间的边
 				k = k->adj;
 
 			if(k==NULL)
 				cout<<"寻找邻接节点异常"<<endl;
-			
-			temp = k->line;
 
 			if(k->line!=lineNum){
-				rear = head;
+				if(!LineFlag){
+					LineFlag = true;
+
+				}else{
+					cout<<"take Line#"<<k->line<<" "<<head<<" "<<rear<<endl;
+				}
 			}
 		}
 	}
