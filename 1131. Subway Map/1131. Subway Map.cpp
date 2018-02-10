@@ -95,7 +95,7 @@ int main(){
 	cin>>N;
 	G.vnum = N;
 	int t = -1; 
-	int linenum = 1;
+	int lineQuantity = 1;
 
 
 	for(int i=0;i<N;i++){
@@ -124,9 +124,28 @@ int main(){
 
 	for(int i=0;i<queryNum;i++){
 		QueryResult re =  query(start[i],end[i]);
-		cout<<re.roadNum<<endl;
-		
+		int lineNum = -1;
+		bool LineFlag = false;
+		int firststa,secondsta;
+		int lk = 1;
+		int head = re.stations[0];
+		int rear = re.stations[lk];
+		int temp;
+		for(int j=0;j<re.roadNum;j++){
 
+			Arcnode *k = G.v[head].adj;
+			while(k!=NULL&&k->vex!=rear)//找到两节点之间的边
+				k = k->adj;
+
+			if(k==NULL)
+				cout<<"寻找邻接节点异常"<<endl;
+			
+			temp = k->line;
+
+			if(k->line!=lineNum){
+				rear = head;
+			}
+		}
 	}
 
 
