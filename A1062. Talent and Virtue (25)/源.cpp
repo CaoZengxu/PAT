@@ -42,7 +42,7 @@ int main() {
 	int totalNum = N;
 	
 	for (int i = 0; i < N;i++) {
-		cin >> Human[i].id;
+		cin >> Human[i].id;//由于scanf异常 改用cin
 		scanf_s("%d%d",&Human[i].virtue,&Human[i].talent);
 		Human[i].total = Human[i].virtue + Human[i].talent;
 		if(Human[i].virtue<L||Human[i].talent<L)
