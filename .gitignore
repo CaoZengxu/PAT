@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+*.lastbuildstate
+*.tlog
+*.idb
+*.log
+*.pdb
+*.vcxproj
+*.filters
+*.enc
+*.user
+/.vs
+/Debug
+/x64/Debug
+*.sln
