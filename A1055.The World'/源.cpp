@@ -9,11 +9,11 @@ typedef struct {
 }P;
 
 
-bool cmp(P a,P b) {
+bool cmp(P a, P b) {
 	if (a.worth != b.worth) return a.worth > b.worth;
 	else if (a.age != b.age) return a.age < b.age;
-	else 
-		return strcmp(a.name,b.name)<0;
+	else
+		return strcmp(a.name, b.name) < 0;
 }
 
 int main() {
@@ -23,7 +23,7 @@ int main() {
 
 	cin >> N >> K;
 	for (int i = 0; i < N; i++) {
-		scanf_s("%s %d %d", p[i].name,10, &p[i].age, &p[i].worth);
+		scanf_s("%s %d %d", p[i].name, 10, &p[i].age, &p[i].worth);
 
 	}
 	sort(p, p + N, cmp);
@@ -33,8 +33,8 @@ int main() {
 		int l = 0;
 		int y = 0;
 		printf("Case #%d:\n", i + 1);
-		while (l < N&&y<num) {
-			if (p[l].age >= Amin&&p[l].age <= Amax) {
+		while (l < N&&y < num) {
+			if (p[l].age >= Amin && p[l].age <= Amax) {
 				printf("%s %d %d\n", p[l].name, p[l].age, p[l].worth);
 				y++;
 			}
@@ -44,7 +44,7 @@ int main() {
 			printf("None\n");
 
 	}
-	
-	
+
+
 	return 0;
 }
